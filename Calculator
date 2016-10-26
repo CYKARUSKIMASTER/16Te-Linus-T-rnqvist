@@ -1,0 +1,43 @@
+package Calculator;
+
+import java.util.Scanner;
+
+public class Calculator {
+
+	
+	
+    public static void main(String[] args) {
+        
+        double num1, num2, result;
+        int method;
+        
+        Scanner in = new Scanner(System.in);
+        System.out.print("1: + 2: - 3: * 4: /    - Enter 1-4: ");
+        method = in.nextInt();
+        
+        System.out.print("Number 1: ");
+        num1 = in.nextDouble();
+        System.out.print("Number 2: ");
+        num2 = in.nextDouble();
+        
+        if (method==1) {
+            result = num1 + num2;
+            System.out.println("Result: " + result);
+        }
+        if (method==2) {
+            result = num1 - num2;
+            System.out.println("Result: " + result);
+        }
+        if (method==3) {
+            result = num1 * num2;
+            System.out.println("Result: " + result);
+        }
+        if (method==4) {
+            result = num1 / num2;
+            System.out.println("Result: " + result);
+            
+        }
+    }
+    
+
+}
