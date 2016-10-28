@@ -1,0 +1,24 @@
+package gues;
+
+import java.util.Scanner;
+ 
+public class Guess {
+      public static void main(String[] args) {
+            int secretNumber;
+            secretNumber = (int) (Math.random() * 99 + 1);           
+            Scanner keyboard = new Scanner(System.in);
+            int guess;
+            do {
+                  System.out.print("Enter a guess (1-100): ");
+                  guess = keyboard.nextInt();
+                  if (guess == secretNumber)
+                        System.out.println("Rätt!");
+                  else if (guess < secretNumber)
+                        System.out
+                                   .println("Din gissning är mindre än nummret");
+                  else if (guess > secretNumber)
+                        System.out
+                                   .println("Din gissning är högre än nummret");
+            } while (guess != secretNumber);
+      }
+}
