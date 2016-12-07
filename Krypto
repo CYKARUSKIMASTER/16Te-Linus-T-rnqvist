@@ -1,0 +1,107 @@
+package Main; 
+
+import java.awt.Color; 
+import java.awt.Container; 
+import java.awt.Dimension; 
+import java.awt.Font; 
+import java.awt.GridLayout; 
+import java.awt.event.ActionEvent; 
+import java.awt.event.ActionListener; 
+
+import javax.swing.BoxLayout; 
+import javax.swing.JButton; 
+import javax.swing.JFrame; 
+import javax.swing.JLabel; 
+import javax.swing.JPanel; 
+import javax.swing.JTextField; 
+
+public class Krypto extends JFrame { 
+
+public static final int GRID_SIZE = 12;
+
+public static final int CELL_SIZE = 40;
+public static final int CANVAS_WIDTH = CELL_SIZE * GRID_SIZE; 
+public static final int CANVAS_HEIGHT = CELL_SIZE * GRID_SIZE; 
+
+public static final Color CELL_BGCOLOR = Color.GRAY; 
+public static final Font FONT_NUMBERS = new Font("Monospaced", Font.BOLD, 20); 
+
+private JTextField[][] tfCells = new JTextField[GRID_SIZE][GRID_SIZE]; 
+
+private boolean[][] masks = new boolean[GRID_SIZE][GRID_SIZE]; 
+
+    //Fixar färg och storlek
+
+public Krypto() { 
+JPanel container = new JPanel(); 
+JPanel above = new JPanel(); 
+JPanel below = new JPanel(); 
+
+JTextField number = new JTextField(); 
+number.setPreferredSize(new Dimension(50, 20)); 
+JTextField kar = new JTextField(); 
+kar.setPreferredSize(new Dimension(50, 20)); 
+JLabel sign = new JLabel("="); 
+
+JButton swap = new JButton("Magic"); 
+
+//Switchar nummer till siffror med "Magic" knappen
+
+swap.addActionListener(new ActionListener() { 
+
+@Override 
+public void actionPerformed(ActionEvent e) { 
+for (int row = 0; row < GRID_SIZE; row++) { 
+for (int col = 0; col < GRID_SIZE; col++) { 
+System.out.println(tfCells[row][col].getText()); 
+if(number.getText().equalsIgnoreCase(tfCells[row][col].getText()) ){ 
+tfCells[row][col].setText(kar.getText().toUpperCase()); 
+} 
+} 
+} 
+} 
+}); 
+container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS)); 
+add(container); 
+container.add(above); 
+container.add(below); 
+
+below.add(number); 
+below.add(sign); 
+below.add(kar); 
+below.add(swap); 
+Container cp = above; 
+cp.setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
+
+for (int row = 0; row < GRID_SIZE; row++) { 
+for (int col = 0; col < GRID_SIZE; col++) { 
+masks[row][col] = true; 
+tfCells[row][col] = new JTextField(); 
+cp.add(tfCells[row][col]); 
+if (masks[row][col]) { 
+tfCells[row][col].setText(""); 
+tfCells[row][col].setEditable(true); 
+tfCells[row][col].setBackground(CELL_BGCOLOR); 
+
+//Gör bakgrund, och att man kan redigera siffran med nummer
+
+} 
+
+tfCells[row][col].setHorizontalAlignment(JTextField.CENTER); 
+tfCells[row][col].setFont(FONT_NUMBERS); 
+} 
+} 
+cp.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT)); 
+pack(); 
+
+setDefaultCloseOperation(3);
+setTitle("Krypto");
+setResizable(false);
+setVisible(true);
+}                        //Frame inställningar
+
+
+public static void main(String[] args) { 
+new Krypto(); 
+} 
+}
